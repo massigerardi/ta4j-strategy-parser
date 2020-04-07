@@ -2,7 +2,6 @@ grammar Strategy;
 
 strategy
     : go_long SEMICOLON go_short
-    | go_short SEMICOLON go_long
     ;
 
 go_long
