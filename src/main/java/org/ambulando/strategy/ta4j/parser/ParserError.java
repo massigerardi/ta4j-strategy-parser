@@ -35,4 +35,15 @@ public class ParserError {
   {
     return msg;
   }
+
+
+  @Override public String toString()
+  {
+    StringBuilder builder = new StringBuilder("ParseError[");
+    if (line>0) builder.append(line).append(",");
+    if (charPositionInLine>0) builder.append(charPositionInLine).append(",");
+    if (msg!=null) builder.append(msg);
+    builder.append("]");
+    return builder.toString();
+  }
 }

@@ -121,11 +121,12 @@ public class TA4JStrategyParserTest {
     } catch (ParserException e) {
       Assert.assertNotNull(e);
       List<ParserError> errors = e.getErrors();
-      Assert.assertEquals(4, errors.size());
-      Assert.assertEquals("token recognition error at: 'CI'", errors.get(0).getMsg());
-      Assert.assertEquals("token recognition error at: 'I['", errors.get(1).getMsg());
-      Assert.assertEquals("token recognition error at: 'SA'", errors.get(2).getMsg());
-      Assert.assertEquals("no viable alternative at input '((EMA[30] >= WMA[87]) OR (5'", errors.get(3).getMsg());
+      Assert.assertEquals(5, errors.size());
+      Assert.assertTrue(errors.toString(), errors.toString().contains("token recognition error at: 'CI'"));
+      Assert.assertTrue(errors.toString(), errors.toString().contains("token recognition error at: 'I['"));
+      Assert.assertTrue(errors.toString(), errors.toString().contains("token recognition error at: 'SA'"));
+      Assert.assertTrue(errors.toString(), errors.toString().contains("no viable alternative at input '(5'"));
+      Assert.assertTrue(errors.toString(), errors.toString().contains("extraneous input ')' expecting '[GO_LONG]'"));
       return;
     }
     fail();
@@ -138,6 +139,7 @@ public class TA4JStrategyParserTest {
     } catch (ParserException e) {
       Assert.assertNotNull(e);
       List<ParserError> errors = e.getErrors();
+      Assert.assertEquals(1, errors.size());
       Assert.assertEquals("Long term period count must be greater than short term period count", errors.get(0).getMsg());
       return;
     }
@@ -151,8 +153,10 @@ public class TA4JStrategyParserTest {
     } catch (ParserException e) {
       Assert.assertNotNull(e);
       List<ParserError> errors = e.getErrors();
-      Assert.assertEquals("token recognition error at: '='", errors.get(0).getMsg());
-      Assert.assertEquals("token recognition error at: '='", errors.get(1).getMsg());
+      Assert.assertEquals(4, errors.size());
+      Assert.assertTrue(errors.toString(), errors.toString().contains("token recognition error at: '='"));
+      Assert.assertTrue(errors.toString(), errors.toString().contains("no viable alternative at input '(KAMA[10, 20, 30]  WMA'"));
+      Assert.assertTrue(errors.toString(), errors.toString().contains("no viable alternative at input '(CCI[5]  2.6'"));
       return;
     }
     fail();
